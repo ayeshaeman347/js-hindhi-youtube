@@ -28,3 +28,28 @@ const myFunction =function(){
 // null ka datatype typeof say object ata ahay
 //nonprimitive ka data type object hi hota
 console.log(typeof myFunction)
+
+
+
+
+//stack(primitive)(copy milta),  heap(non-primitive)(orogonal reference milta)
+// variable copy data to original may chanagew nai ata copy may change hota
+
+let myyoutubename="hiteshchoudruy"
+let anothername = myyoutubename
+anothername="chaiourcode"
+console.log(myyoutubename);
+console.log(anothername);
+
+//function heap hay to ya refeence data to origiunak may change ata
+
+let userOne= function(){
+    email:"ayesha@gmail.com"
+}
+let userTwo=userOne
+userTwo.email="ahsan@gmail.com"
+console.log(userOne.email);
+console.log(userTwo.email);
+
+
+
