@@ -50,3 +50,31 @@ console.log(Object.entries(tinderUser))
 
 console.log(tinderUser.hasOwnProperty('isloggedin'))
 //isenumerable matlab lop laga skatay hay ya ani?
+
+
+//object destructuring
+const course={
+    coursename:"jsin hindi",
+    courseprice:999,
+    courseinstructor:"hitesh"
+}
+//syntax hya 
+const{courseinstructor}=course
+console.log(courseinstructor)
+//name chota kr ky bhi day sakty 
+const{courseinstructor:inst}=course
+console.log(inst)
+
+//apis apna kam kisi or ka srr pay dalna hay  kisis say apna kam karwana
+//khuch values aty hay backned say un valiues ko kasay likhna hay values json may aty hay
+
+// {
+//     "name":"hitesh",
+//     "courseName": "jshindui",
+//     "price":300
+
+// }
+//apis in form of array
+// [
+//     {},{},
+// ]
