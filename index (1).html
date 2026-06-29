@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do List</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 16px;
+    }
+    .app { width: 100%; max-width: 500px; }
+    h1 { text-align: center; font-size: 2rem; color: #a78bfa; margin-bottom: 24px; }
+    .input-row { display: flex; gap: 10px; margin-bottom: 24px; }
+    input {
+      flex: 1;
+      padding: 14px 18px;
+      background: #1e293b;
+      border: 2px solid #334155;
+      border-radius: 10px;
+      color: #f1f5f9;
+      font-size: 1rem;
+      outline: none;
+    }
+    input:focus { border-color: #a78bfa; }
+    button.add-btn {
+      padding: 14px 22px;
+      background: #a78bfa;
+      color: #0f172a;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .stats { text-align: center; color: #64748b; margin-bottom: 20px; font-size: 0.9rem; }
+    .stats span { color: #a78bfa; font-weight: 600; }
+    ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    li {
+      background: #1e293b;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: opacity 0.3s;
+      border: 1px solid #334155;
+    }
+    li.done { opacity: 0.5; }
+    li.done .task-text { text-decoration: line-through; color: #64748b; }
+    .task-text { flex: 1; font-size: 1rem; cursor: pointer; }
+    .del-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .del-btn:hover { background: #ef444430; }
+    .empty { text-align: center; color: #475569; padding: 40px; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>📝 To-Do List</h1>
+    <div class="input-row">
+      <input type="text" id="taskInput" placeholder="Add a new task..." />
+      <button class="add-btn" id="addBtn">Add</button>
+    </div>
+    <div class="stats">Total: <span id="totalCount">0</span> | Done: <span id="doneCount">0</span></div>
+    <ul id="taskList"></ul>
+    <div class="empty" id="emptyMsg">No tasks yet. Add one above!</div>
+  </div>
+
+  <script>
+    // ✅ Demonstrates: closures, scope, DOM manipulation, event handling
+
+    // This array is in the OUTER scope — a closure
+    const tasks = [];
+
+    // ---- Pure functions (no side effects) ----
+    function createTask(text) {
+      return { id: Date.now(), text, done: false }; // each task is an object
+    }
+
+    // ---- DOM rendering ----
+    function render() {
+      const list = document.getElementById('taskList');
+      const emptyMsg = document.getElementById('emptyMsg');
+
+      // Update stats
+      document.getElementById('totalCount').textContent = tasks.length;
+      document.getElementById('doneCount').textContent = tasks.filter(t => t.done).length;
+
+      // Show/hide empty message
+      emptyMsg.style.display = tasks.length === 0 ? 'block' : 'none';
+
+      // Re-render list
+      list.innerHTML = '';
+      tasks.forEach(function(task) {
+        // 🔑 CLOSURE: this function "closes over" the task object
+        const li = document.createElement('li');
+        if (task.done) li.classList.add('done');
+
+        li.innerHTML = `
+          <span class="task-text">${task.text}</span>
+          <button class="del-btn" title="Delete">✕</button>
+        `;
+
+        // Toggle done on text click
+        li.querySelector('.task-text').addEventListener('click', function() {
+          task.done = !task.done; // modifies the object in tasks array
+          render();
+        });
+
+        // Delete on button click
+        li.querySelector('.del-btn').addEventListener('click', function() {
+          const index = tasks.indexOf(task);
+          tasks.splice(index, 1); // remove from array
+          render();
+        });
+
+        list.appendChild(li);
+      });
+    }
+
+    // ---- Add task ----
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      const text = input.value.trim();
+      if (!text) return; // guard clause
+
+      tasks.push(createTask(text)); // add to array
+      input.value = '';             // clear input
+      render();
+    }
+
+    // ---- Event Listeners ----
+    document.getElementById('addBtn').addEventListener('click', addTask);
+
+    document.getElementById('taskInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') addTask(); // press Enter to add
+    });
+
+    render(); // initial render
+  </script>
+</body>
+</html>
