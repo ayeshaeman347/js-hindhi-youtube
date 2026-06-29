@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quiz App</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#222;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+#app{
+    background:white;
+    width:400px;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+}
+
+
+button{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    cursor:pointer;
+    border:none;
+    border-radius:8px;
+    background:#ddd;
+}
+
+
+button:hover{
+    background:#bbb;
+}
+
+
+.correct{
+    background:green;
+    color:white;
+}
+
+
+.wrong{
+    background:red;
+    color:white;
+}
+
+
+#next{
+    background:blue;
+    color:white;
+    display:none;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="app"></div>
+
+
+
+<script>
+
+
+const questions = [
+
+{
+question:"Which keyword is used to declare a constant variable?",
+options:["var","let","const","static"],
+answer:"const"
+},
+
+
+{
+question:"What does DOM stand for?",
+options:[
+"Data Object Model",
+"Document Object Model",
+"Design Object Model"
+],
+answer:"Document Object Model"
+},
+
+
+{
+question:"Which method adds element at the end of array?",
+options:[
+"pop()",
+"push()",
+"shift()"
+],
+answer:"push()"
+}
+
+
+];
+
+
+
+let currentIndex = 0;
+
+let score = 0;
+
+
+
+function renderQuestion(){
+
+
+const q = questions[currentIndex];
+
+const app = document.getElementById("app");
+
+
+
+app.innerHTML = `
+
+<h2>${q.question}</h2>
+
+
+${q.options.map(function(option){
+
+return `<button class="option">${option}</button>`
+
+}).join("")}
+
+
+
+<button id="next">
+Next
+</button>
+
+
+`;
+
+
+
+const buttons = document.querySelectorAll(".option");
+
+
+
+buttons.forEach(function(button){
+
+
+button.addEventListener("click",function(){
+
+
+if(button.textContent === q.answer){
+
+
+score++;
+
+button.classList.add("correct");
+
+
+}
+
+else{
+
+
+button.classList.add("wrong");
+
+
+}
+
+
+
+buttons.forEach(function(btn){
+
+btn.disabled=true;
+
+});
+
+
+document.getElementById("next").style.display="block";
+
+
+});
+
+
+});
+
+
+
+
+
+document.getElementById("next").addEventListener("click",function(){
+
+
+currentIndex++;
+
+
+if(currentIndex < questions.length){
+
+
+renderQuestion();
+
+
+}
+
+else{
+
+
+showResult();
+
+
+}
+
+
+});
+
+
+}
+
+
+
+
+function showResult(){
+
+
+document.getElementById("app").innerHTML = `
+
+<h2>Quiz Completed 🎉</h2>
+
+<h3>
+Score: ${score}/${questions.length}
+</h3>
+
+<button onclick="restart()">
+Restart
+</button>
+
+`;
+
+}
+
+
+
+
+function restart(){
+
+
+currentIndex=0;
+
+score=0;
+
+renderQuestion();
+
+
+}
+
+
+
+
+renderQuestion();
+
+
+</script>
+
+
+</body>
+</html>

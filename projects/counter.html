@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <title>Counter App</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #f1f5f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
     .card { background: #1e293b; border-radius: 20px; padding: 50px 60px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
     h1 { font-size: 1.4rem; color: #94a3b8; margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase; }
     #count { font-size: 6rem; font-weight: 700; color: #38bdf8; line-height: 1; margin-bottom: 40px; transition: transform 0.1s ease; }
-    #count.bump { transform: scale(1.15); }
+     
     .buttons { display: flex; gap: 16px; justify-content: center; }
     button { padding: 14px 28px; font-size: 1rem; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; transition: opacity 0.2s, transform 0.1s; }
     button:active { transform: scale(0.95); }
     #dec { background: #ef4444; color: white; }
     #inc { background: #22c55e; color: white; }
     #reset { background: #475569; color: white; }
-  </style>
+  </style> 
 </head>
 <body>
   <div class="card">
@@ -36,8 +36,7 @@
       if (count > 0) countEl.style.color = '#22c55e';
       else if (count < 0) countEl.style.color = '#ef4444';
       else countEl.style.color = '#38bdf8';
-      countEl.classList.add('bump');
-      setTimeout(() => countEl.classList.remove('bump'), 100);
+      
     }
     document.getElementById('inc').addEventListener('click', function() { count++; updateDisplay(); });
     document.getElementById('dec').addEventListener('click', function() { count--; updateDisplay(); });
