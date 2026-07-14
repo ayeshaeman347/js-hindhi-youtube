@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<h2>>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Amaizing images</h2>
+    <ul id="images">
+       
+        <li></li> <img width="200px" id="photoshop" src="https://tse3.mm.bing.net/th/id/OIP.4K3cmQAKk84SJHJJpy3DnQHaDG?r=0&pid=Api&h=220&P=0" alt="photoshop"/> </li>
+        <li><img width="200px" id="japan" src="https://tse4.mm.bing.net/th/id/OIP.OsnhSFWkGzV4blaxYFSeDgHaD9?r=0&pid=Api&h=220&P=0" alt=""></li>
+        <li> <img width="200px" id="river" src="https://tse3.mm.bing.net/th/id/OIP.FGChna0IQm90niSTY8CjsgHaE7?r=0&pid=Api&h=220&P=0" alt=""/></li>
+        <li> <img width="200px" id="owl" src="https://tse4.mm.bing.net/th/id/OIP.aRE8i5tmIp_Hkn_JdSJ9AAHaFw?r=0&pid=Api&h=220&P=0"  alt="" /></li>
+        <li> <img width="200px" id="prayer" src="https://tse2.mm.bing.net/th/id/OIP.klHvugENfVJxSsXOqGJdAAHaE8?r=0&pid=Api&h=220&P=0" alt=""/></li>
+        <li> <a  style ="color:blue;" href="https://google.com" id="google">Google</a></li>
+    </ul>
+        
+
+</body>
+<Script>
+    //javascript may evenets sequencially run krty hya
+    //events kisi activity pay invokr hotay hay
+    //agr hm image tag ka andra ki alert lagana chahya to waha ah alt ka bad likh dain gain onClick="" is ka andr alret ya jo bhi ap lagana chhao laga skata ho
+// lakin ya jo hm image tag ka andr hi onclick laga dataya hay ya approch bilkul bhi nai hay 
+//feSIBLe nai hay 
+// documnet.getElementById("owl").onCickEvent =function(){
+//     alert("owl clicked")
+// }//is ka andr koi problem nai h lakin feature kam hay
+//saray events llisten kar sakta hay drap keyborad waghara etc
+// document.grtElementById("owl").addEventListener('click',function (){
+// alert("owl clicked")
+// },false)//default third parameter false hota hay
+//attactevenet ka bhi use hota early time may se hota tha
+//j query may .OnEvemetListener bhi hota tha
+// document.getElementById("owl").addEventListener('click',function (e){
+//     console.log(e);
+// },false)//browser 
+//type kay baraay may paray,default perevent(kisi tag ka default behavouir ro skatay hayin,
+//target,source,toelemnt
+//clientx,clienty,offsetx,offsety,screenx,screeny
+//event ka type,jo event trigger ho raha hay wo type kya hay
+//altkey,ctrlkey,shiftkey,metaKey press hoi ya nai eveent say
+//event ka target,jo event trigger ho raha hay wo kis tag pay ho raha hay
+
+
+//event propogataion
+//false or true kiya hay event object may??
+
+//false(event bubbling),true(event capturing)
+// document.getElementById("images").addEventListener('click',function (e){
+//     console.log("clicked inside the ul");
+// },false)
+// document.getElementById("owl").addEventListener('click',function (e){
+//     console.log("owl clicked");
+// },false) // ya tab click ho ga jab ap apnay owl ko click karo gain to ap ka top wlaa code bhi activate hona chahaya
+//phly owl cliked print ho ga ya phly clicked inside the ul print ho ga ya depend karta hay apnay event listener ka false or true lagaya hay ya nai
+// dakaya jb hm nay owl pauy click kiya to phly owl clicked print ho ga or phly clicked inside the ul print ho ga ya depend karta hay apnay event listener ka false or true lagaya hay ya nai agr to fale lagaya hay to phly owl clicked print ho ga bad may clicked inside the ul print ho ga or agr true lagaya hay to phly clicked inside the ul print ho ga or baad may owl clicked print ho ga
+//isay khty hya evenet bubbling jo inside say outside jata hay
+//agr hm true lagaty to event capturing hota owl par click karmay sya ph;ly  click inside ul print ho ga or baad may owl clicked print ho ga
+//akkbhi labhi ap chhaty hay bubbling na ho inner ellemet seprate rahay outer seprate rhaya inner outer ko track na karaya to ap use karaya gain e.stopPropagation() method
+// document.getElementById("owl").addEventListener('click',function (e){
+//     console.log("owl clicked");
+//     e.stopPropagation(); // This will prevent the event from bubbling up
+// },false)
+//hm chahty hay by default google pay click karmay ka abad googl ana khlay to
+// document.getElementById("google").addEventListener('click',function (e){
+//     e.preventDefault(); // This will prevent the default action of the link
+//     e.stopPropagation(); // This will prevent the event from bubbling up
+//     console.log("google clicked"); 
+// },false)
+//may chahta ho jis image pay click karo wo ghaib ho jaya
+document.querySelector('#images').addEventListener('click',function(e){
+    if(e.target.tagName==='IMG')
+{
+    let removeIt=e.target.parentNode
+    removeIt.remove()
+//removeIt.parentNode.removeChild(removeIt) //ya bhi kaam karay ga
+}
+})
+</script>
+
+
+</html>

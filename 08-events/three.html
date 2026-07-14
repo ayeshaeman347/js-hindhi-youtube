@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>chai or javascript</h1>
+    <button id="sta">start</button>
+    <button id="sto">stop</button>
+    
+</body>
+<script>
+    const sayString=function(str){
+        console.log(str,Date.now())
+    };
+    //ab yad rakhiya ap ko interval id block  kay bahir hi declare karna parta ku kay is ka sciope matter karat hay
+    let intervalId;
+//ya hr do sec bad console.log karay ga or date.now() ka use kr k hum time print karwa sakty hay
+document.querySelector("#sta").addEventListener('click',function(){
+    intervalId=setInterval(sayString, 2000,"hi");
+});//ab jasay hi hm start button pay click karay ga to set interval ko start kar day ga or h1 ka text change nai ho ga
+document.querySelector("#sto").addEventListener('click',function(){
+    clearInterval(intervalId);
+});//ab jasay hi hm stop button pay click karay ga to set interval ko rok day ga or h1 ka text change nai ho ga
+    </script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>chai or code</h1>
+    <button>stop</button>
+    
+</body>
+<script>
+    //settime out ko handler chhahaiya handler ak function hay jo settime out ko call krta hay call back jis ka name nai hay 
+    //dosra timeout chhahiya jo number may milta hay
+//     setTimeout(function(){//ms may hota to ya 2 sec hay
+    
+//         console.log("hello world")
+//     }, 2000);
+//     //itnay time print karwa dana 
+// //isi tara set interval funaction  waha inteval mangtay hay break time lay raha lakin time interval reppedtly  kam karay ga hr do second bad wahi kam repeat karay ga 
+//     setInterval(function(){
+//         console.log("hello world")
+//     }, 2000);
+//     const sayhitesh =function(){
+//         console.log("hello hitesh")
+//     }
+//     setTimeout(sayhitesh, 2000);
+    const changeText=function(){
+        document.querySelector('h1').innerHTML="best js series";
+    };
+    const changeMe=setTimeout(changeText,2000);
+    // clearTimeout(changeMe);//clear timeout ko use kr k hum set time out ko rok sakty hay
+    //event pay cleartimeou lagyaa 
+    document.querySelector('button').addEventListener('click',function(){
+        clearTimeout(changeMe);
+        console.log("you have stopped the set time out");
+    });//ab jasay hi hm button pay click karay ga to set time out ko rok day ga or h1 ka text change nai ho ga
+
+</script>
+</html>
